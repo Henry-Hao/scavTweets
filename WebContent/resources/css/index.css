@@ -1,0 +1,82 @@
+.mycontainer{
+    display: inline-block;
+    border: 1px solid ;
+    margin-top: 50px;
+}
+.login-part,.register-part{
+    margin-top: 80px;
+    width:300px;
+    height:200px;
+    margin-bottom: 30px;
+}
+.border{
+           border: ridge;
+           height: 50px;
+}
+.myrow{
+	margin:50px auto;
+}
+.right{
+	right:10px;
+	position: absolute;	
+}
+.welcome{
+	display: inline;
+}
+.mynav{
+    top: 20px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    float: left;
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+}
+.mynav a{
+	background-color:white;
+    text-decoration: none;
+    height: 40px;
+    width: 170px;
+    font-size: 15px;
+    font-weight: 100;
+    line-height: 20px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    
+    display: block;
+    letter-spacing: 4px;
+    padding: 12px 10px 3px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    transition: all 0.2s ease-in-out;
+}
+.myp{
+	height: 10px;
+    width: 170px;
+    background-color: gray;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+.mynav a:hover{
+	background-color: #f3f3f3;
+}
+.myframe{
+    top: 30px;
+    left: 55px;
+    width: 915px;
+    position: relative;
+    height: 500px;
+}
+.mylisthead{
+	background-color:#f3f3f3;
+    font-size: 18px;
+    height: 40px;
+    width: 170px;
+    margin-bottom: 0;
+    padding: 8px 10px 3px;
+}
