@@ -1,28 +1,41 @@
 package scavTweets.tweets;
 
+import java.sql.PreparedStatement;
+
 import org.json.*;
+
 
 import scavTweets.dao.Sql;
 
 public class Comparison 
 {
-	public void word_compare(String[] words, String [] tweets,String result_id) throws JSONException
+	public static void main(String[] args) {
+		StringBuilder sb = new StringBuilder("abc");
+		sb.append("123");
+		sb.append("'");
+		System.out.println(sb.toString());
+	}
+	
+	public void word_compare(String[] words, String [] tweets,String result_id) throws Exception
 	{
 		JSONObject result=new JSONObject();
 		JSONArray array=new JSONArray();
 		JSONObject tweet = new JSONObject();
 		String [] split;
+		
 		boolean flag;
-		boolean tweetsFlag = false;
-		int i;
+		boolean batchSwitch = false;//True means at least one tweet contains one of the keywords
+		
 		System.out.println("Tweets Length: "+tweets.length);
-		Sql sql = new Sql();
-		String sqlString = "INSERT into "+result_id+" (Time,Keyword,Content) VALUES";
-		for(i=0;i<words.length;i++)
+		
+		Sql s = new Sql();
+		PreparedStatement pst = s.getCon().prepareStatement("INSERT into "+result_id+" (Time,Keyword,Content) VALUES (?,?,?)");
+			
+		for(int i = 0; i < words.length; i++)
 		{
 			for(int j=0;(j<tweets.length)&&(tweets[j]!=null);j++)
 			{
-				tweets[j].replaceAll("\'","\"");
+				tweets[j] = tweets[j].replaceAll("\'","\"");
 				flag = false;
 				System.out.println("Tweet Number: " +j);
 				split = tweets[j].split(" ");
@@ -32,30 +45,24 @@ public class Comparison
 					if(words[i].equals(split[k]))
 					{
 						flag = true;
-						tweetsFlag = true;
+						batchSwitch = true;
 					}
 				}
 				
 				if(flag)
 				{
-					tweet.put("Username:", split[0]);
-					tweet.put("TimeStamp:", split[2]);
-					tweet.put("Content:", tweets[j]);
-					array.put(tweet);
-					
-					sqlString += "('"+split[2];
-					sqlString += "','"+words[i];
-					sqlString += "','"+tweets[j];
-					sqlString += "'),";
+					pst.setString(1,split[2]);
+					pst.setString(2, words[i]);
+					pst.setString(3, tweets[j]);
+					pst.addBatch();
 				}
 			}
 			result.put(words[i], array);
 			//At least one tweet contains the keyword
 		}
-		if(tweetsFlag) {
-			sqlString = sqlString.substring(0, sqlString.length()-1);
-			sql.executeQuery(sqlString);
+		
+		if(batchSwitch) {
+			pst.executeBatch();
 		}
-//		return result;
 	}
 }

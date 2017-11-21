@@ -11,6 +11,8 @@ import java.sql.Statement;
 public class Sql {
 	
 	private  Connection con; 
+	
+
 	private  PreparedStatement pstmt;
 	private  ResultSet rs;
 	private  int result;
@@ -19,15 +21,19 @@ public class Sql {
 		con = DB.getConnection(); 
 	}
 	
+	public Connection getCon() {
+		return con;
+	}
+	
 	public PreparedStatement getStmt() {
 		return this.pstmt;
 	}
 	
-	public int executeUpdate(String sql) {
+	
+	public int executeUpdate(String sql) throws SQLException{
 		try {  
             pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);  
             result = pstmt.executeUpdate();  
-              
             
         } catch (SQLException e) {  
             e.printStackTrace();  
@@ -39,7 +45,6 @@ public class Sql {
 		try {  
             pstmt = con.prepareStatement(sql);  
             rs = pstmt.executeQuery(); 
-              
         } catch (SQLException e) {  
             e.printStackTrace();  
         }

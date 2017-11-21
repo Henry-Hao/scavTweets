@@ -51,7 +51,7 @@ public class Search {
 				+ "`Keyword` varchar(45) DEFAULT NULL,"
 				+ "`Content` varchar(500) DEFAULT NULL,"
 				+ "PRIMARY KEY (`Id`)) "
-				+ "ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+				+ "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 		sql.executeUpdate(sqlString);
 		sql.destroy();
 	}
