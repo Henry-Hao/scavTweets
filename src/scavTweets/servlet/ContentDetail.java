@@ -1,27 +1,32 @@
 package scavTweets.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.alibaba.fastjson.JSON;
 
-import scavTweets.dao.Search;
+import scavTweets.dao.Result;
 
 /**
- * Servlet implementation class removeSearch
+ * Servlet implementation class ContentDetail
  */
-@WebServlet("/removeSearch")
-public class RemoveSearch extends HttpServlet {
+@WebServlet("/ContentDetail")
+public class ContentDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private long search_id;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveSearch() {
+    public ContentDetail() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,26 +42,17 @@ public class RemoveSearch extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException,NumberFormatException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String ss = request.getParameter("removeId");
-		search_id = Long.parseLong(ss);
-		RR r = new RR();
-		r.result = "fail";
-		int result = 0;
-		
+		String result_id = request.getParameter("Result_id");
+		String tweet_id = request.getParameter("Tweet_id");
 		try {
-			result = Search.removeSearch(search_id);
+			String content = Result.getContent(result_id,tweet_id);
+			response.getWriter().write(content);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(result == 1)
-			r.result = "success";
-		
-		response.getWriter().write(JSON.toJSONString(r));
 	}
-	class RR{
-		public String result;
-	}
+
 }

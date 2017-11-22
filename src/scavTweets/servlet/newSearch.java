@@ -21,7 +21,7 @@ import scavTweets.tweets.SearchTask;
  * Servlet implementation class newSearch
  */
 @WebServlet("/newSearch")
-public class newSearch extends HttpServlet {
+public class NewSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        private String Region;
        private String Start_time;
@@ -34,7 +34,7 @@ public class newSearch extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public newSearch() {
+    public NewSearch() {
         super();
         // TODO Auto-generated constructor stub
     }

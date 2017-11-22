@@ -19,14 +19,14 @@ import scavTweets.util.Constant;
 /**
  * Servlet implementation class dispatcher
  */
-@WebServlet("/dispatcher")
-public class dispatcher extends HttpServlet {
+@WebServlet("/router")
+public class Router extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public dispatcher() {
+    public Router() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,10 +53,11 @@ public class dispatcher extends HttpServlet {
 			try {
 				returnJson = Result.getAllResult(user.getId());
 				
-			} catch (SQLException | JSONException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 				request.setAttribute("result", returnJson);
+				request.setCharacterEncoding("ISO-8859-1");
 				request.getRequestDispatcher(Constant.VIEW_PUBLIC + "/result.jsp").forward(request, response);
 				break;
 		}

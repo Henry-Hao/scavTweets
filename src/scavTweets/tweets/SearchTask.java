@@ -8,7 +8,7 @@ import twitter4j.*;
 import java.util.*;
 import java.util.List;
 
-import scavTweets.servlet.dispatcher;
+import scavTweets.servlet.Router;
 
 
 public class SearchTask implements Runnable 

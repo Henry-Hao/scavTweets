@@ -19,6 +19,7 @@
 <body>
 	<div class="container">
         <textarea id="dataField" style="display: none">
+			<% request.setCharacterEncoding("ISO-8859-1"); %>
             <%= request.getAttribute("result")%>
         </textarea>
 	   <table id="resultTable" 
@@ -31,6 +32,7 @@
 	          data-sort-order="desc">
 	     <thead>
 	       <tr>
+       		 <th data-field="Result_id" data-width="30" data-align="left">Result_id</th>
 	       	 <th data-field="Name" data-width="30" data-align="left">Name</th>
 	         <th data-field="Term" data-width="30" data-align="left" data-sortable="true">Term</th>
 	         <th data-field="Tweets" data-width="30" data-align="left" data-sortable="true">Tweets</th>
@@ -66,9 +68,10 @@
 			     <thead>
 			       <tr>
 			       	 <th data-field="Id" data-width="30" data-align="left">Id</th>
+			       	 <th data-field="Username" data-width="30" data-align="left" data-sortable="true">Username</th>
 			         <th data-field="Time" data-width="30" data-align="left" data-sortable="true">Time</th>
 			         <th data-field="Keyword" data-width="30" data-align="left" data-sortable="true">Keyword</th>
-			         <th data-field="Content" data-width="30" data-align="left" data-sortable="true">Content</th>
+			         <th data-field="Content" data-width="20" data-formatter="contentFormatter" data-events="contentEvents">Content</th>
 	             	</tr>
 			     </thead>
 			   </table>
